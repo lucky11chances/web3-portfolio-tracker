@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Hardhat
+artifacts/
+cache/
+typechain/
+typechain-types/
+
+# Environment
+.env
+.env.local
+
+# Coverage
+coverage/
+cov_env.json
+coverage.json
+
+# Tooling
+.DS_Store
+逻辑合约.docx
