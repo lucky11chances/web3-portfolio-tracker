@@ -21,3 +21,4 @@ coverage.json
 # Tooling
 .DS_Store
 逻辑合约.docx
+.npm-cache/

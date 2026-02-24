@@ -1,0 +1,46 @@
+flowchart LR
+   %% =========================
+    %% 🎨 MODERN THEME PALETTE
+    %% =========================
+    %% Dark Navy (Entry/Exit): #1B2631
+    %% Bright Teal (Process): #1ABC9C
+    %% Coral Red (Decision): #E74C3C
+    %% Royal Blue (Oracle): #3498DB
+    %% Soft Gray (Background): #ECF0F1
+
+    %% Base Styles
+    classDef entry fill:#1B2631,stroke:#34495E,stroke-width:2px,color:#fff,rx:5,ry:5,font-weight:bold
+    classDef process fill:#1ABC9C,stroke:#16A085,stroke-width:2px,color:#fff,rx:5,ry:5
+    classDef decision fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff,rx:5,ry:5,diamond
+    classDef oracle fill:#3498DB,stroke:#2980B9,stroke-width:2px,color:#fff,stroke-dasharray: 5 5,rx:5,ry:5
+
+    %% =========================
+    %% 🚀 FLOW LOGIC
+    %% =========================
+
+    Start([Client Call]) --> Init[Fetch Data]
+    Init --> CheckManual{Manual?}
+
+    %% Oracle Section: Standard Left-to-Right
+    subgraph PriceFeedLogic [Hybrid Oracle Architecture]
+        direction LR
+        style PriceFeedLogic fill:#ECF0F1,stroke:#BDC3C7,stroke-width:2px,color:#2C3E50,stroke-dasharray: 5 5
+        
+        CheckManual -- Yes --> ManualPrice[Manual Price]
+        CheckManual -- No --> ChainlinkCall[Chainlink Call]
+        
+        ChainlinkCall --> ValidCheck{Valid?}
+        ValidCheck -- Yes --> ChainlinkPrice[Use Chainlink]
+        ValidCheck -- No --> ManualPrice
+        
+        ChainlinkPrice --> SetPrice[Final Price]
+        ManualPrice --> SetPrice
+    end
+
+    %% =========================
+    %% 🖌️ APPLY STYLES
+    %% =========================
+    class Start entry;
+    class Init,SetPrice process;
+    class CheckManual,ValidCheck decision;
+    class ChainlinkCall,ManualPrice,ChainlinkPrice oracle;
